@@ -1,0 +1,8 @@
+<h1><%= title %></h1>
+<form action="/student/edit/<%=id%>" method="post">
+  <input type="text" name="first_name" placeholder="First Name" value="<%=student.first_name%>"><br>
+  <input type="text" name="last_name" placeholder="Last Name" value="<%=student.last_name%>"><br>
+  <input type="text" name="email" placeholder="Email" value="<%=student.email%>"><br>
+  <input type="submit" value="Edit Student">
+</form>
+<a href="/student">Back</a>

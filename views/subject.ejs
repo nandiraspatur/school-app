@@ -1,0 +1,13 @@
+<h1><%= title %></h1>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Subject Name</th>
+  </tr>
+  <%subjects.forEach((subject)=>{%>
+    <tr>
+      <td><%=subject.id%></td>
+      <td><%=subject.subject_name%></td>
+    </tr>
+  <%})%>
+</table>

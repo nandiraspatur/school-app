@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include partial/header.ejs %>
+  </head>
+  <body>
+    <% include partial/logo.ejs %>
+    <% include partial/menu.ejs %>
+    <br>
+    <form class="form" action="/subject/edit/<%=id%>" method="post">
+      <input type="text" name="subject_name" placeholder="Subject Name" value="<%=subject.subject_name%>"><br>
+      <input class="btn" type="submit" value="Edit Student">
+    </form>
+  </body>
+</head>

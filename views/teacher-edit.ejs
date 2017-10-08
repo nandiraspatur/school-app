@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include partial/header.ejs %>
+  </head>
+  <body>
+    <% include partial/logo.ejs %>
+    <% include partial/menu.ejs %>
+    <br>
+    <form class="form" action="/teacher/edit/<%=id%>" method="post">
+      <input type="text" name="first_name" placeholder="First Name" value="<%=teacher.first_name%>"><br>
+      <input type="text" name="last_name" placeholder="Last Name" value="<%=teacher.last_name%>"><br>
+      <input type="text" name="email" placeholder="Email" value="<%=teacher.email%>"><br>
+      <select name="SubjectId">
+        <%if(teacher.Subject){%>
+          <option value="<%=teacher.Subject.id%>"><%=teacher.Subject.subject_name%></option>
+          <%subjects.forEach(subject => {%>
+            <option value="<%=subject.id%>"><%=subject.subject_name%></option>
+        <%})
+          }else{%>
+          <option value="">Select Subject</option>
+          <%subjects.forEach(subject => {%>
+            <option value="<%=subject.id%>"><%=subject.subject_name%></option>
+        <%})
+        }%>
+      <input class="btn" type="submit" value="Edit Teacher">
+    </form>
+  </body>
+</html>

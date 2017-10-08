@@ -1,8 +1,17 @@
-<h1><%= title %></h1>
-<form action="/student/edit/<%=id%>" method="post">
-  <input type="text" name="first_name" placeholder="First Name" value="<%=student.first_name%>"><br>
-  <input type="text" name="last_name" placeholder="Last Name" value="<%=student.last_name%>"><br>
-  <input type="text" name="email" placeholder="Email" value="<%=student.email%>"><br>
-  <input type="submit" value="Edit Student">
-</form>
-<a href="/student">Back</a>
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include partial/header.ejs %>
+  </head>
+  <body>
+    <% include partial/logo.ejs %>
+    <% include partial/menu.ejs %>
+    <br>
+    <form class="form" action="/student/edit/<%=id%>" method="post">
+      <input type="text" name="first_name" placeholder="First Name" value="<%=student.first_name%>"><br>
+      <input type="text" name="last_name" placeholder="Last Name" value="<%=student.last_name%>"><br>
+      <input type="text" name="email" placeholder="Email" value="<%=student.email%>"><br>
+      <input class="btn" type="submit" value="Edit Student">
+    </form>
+  </body>
+</head>

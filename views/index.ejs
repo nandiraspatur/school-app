@@ -1,5 +1,11 @@
-<h1><%= title %></h1>
-<p>Welcome to <%= title %></p>
-<a href="/teacher">Teacher</a>
-<a href="/subject">Subject</a>
-<a href="/student">Student</a>
+<!DOCTYPE html>
+<html>
+  <% include partial/header.ejs %>
+  <body>
+    <div class="home">
+      <%include partial/logo.ejs%>
+      <h1>Welcome To App School</h1>
+    </div>
+  <% include partial/menu.ejs %>
+  </body>
+</html>

@@ -1,17 +1,43 @@
-<h1><%= title %></h1>
-<table>
-  <tr>
-    <th>ID</th>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Email</th>
-  </tr>
-  <%teachers.forEach((teacher)=>{%>
-    <tr>
-      <td><%=teacher.id%></td>
-      <td><%=teacher.first_name%></td>
-      <td><%=teacher.last_name%></td>
-      <td><%=teacher.email%></td>
-    </tr>
-  <%})%>
-</table>
+<!DOCTYPE html>
+<html>
+  <% include partial/header.ejs %>
+  <body>
+    <% include partial/logo.ejs %>
+    <% include partial/menu.ejs %>
+    <br>
+    <table class="table-fill">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Teacher</th>
+          <th>Option</th>
+        </tr>
+      </thead>
+      <tbody class="table-hover">
+        <%teachers.forEach((teacher, i)=>{%>
+          <tr>
+            <td><%=i+1%></td>
+            <td><%=teacher.id%></td>
+            <td><%=teacher.first_name%></td>
+            <td><%=teacher.last_name%></td>
+            <td><%=teacher.email%></td>
+            <td><%if(teacher.Subject){%>
+              <%=teacher.Subject.subject_name%>
+              <%}else{%>
+                unassign
+                <%}%>
+              </td>
+            <td>
+              <a href="/teacher/edit/<%=teacher.id%>"><i class="material-icons">mode_edit</i></a>
+              <a href="/teacher/delete/<%=teacher.id%>"><i class="material-icons">delete_forever</i></a>
+            </td>
+          </tr>
+        <%})%>
+      </tbody>
+    </table>
+  </body>
+</html>

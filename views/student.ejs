@@ -1,23 +1,40 @@
-<h1><%= title %></h1>
-<table>
-  <tr>
-    <th>ID</th>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Email</th>
-    <th>Option</th>
-  </tr>
-  <%students.forEach((student)=>{%>
-    <tr>
-      <td><%=student.id%></td>
-      <td><%=student.first_name%></td>
-      <td><%=student.last_name%></td>
-      <td><%=student.email%></td>
-      <td>
-        <a href="/student/edit/<%=student.id%>">Edit</a>
-        <a href="/student/delete/<%=student.id%>">Delete</a>
-      </td>
-    </tr>
-  <%})%>
-</table>
-<a href="/student/add">Add New Student</a>
+<!DOCTYPE html>
+<html>
+  <% include partial/header.ejs %>
+  <body>
+    <% include partial/logo.ejs %>
+    <% include partial/menu.ejs %>
+    <br>
+    <table class="table-fill">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Full Name</th>
+          <th>Actions</th>
+          <th>Option</th>
+        </tr>
+      </thead>
+      <tbody class="table-hover">
+        <%students.forEach((student, i)=>{%>
+          <tr>
+            <td><%=i+1%></td>
+            <td><%=student.id%></td>
+            <td><%=student.first_name%></td>
+            <td><%=student.last_name%></td>
+            <td><%=student.email%></td>
+            <td><%=student.getFullName()%></td>
+            <td><a class="action" href="/student/<%=student.id%>/addsubject">Add Subject</a></td>
+            <td>
+              <a href="/student/edit/<%=student.id%>"><i class="material-icons">mode_edit</i></a>
+              <a href="/student/delete/<%=student.id%>"><i class="material-icons">delete_forever</i></a>
+            </td>
+          </tr>
+        <%})%>
+      </tbody>
+    </table>
+  </body>
+</html>

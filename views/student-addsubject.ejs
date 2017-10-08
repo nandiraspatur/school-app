@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include partial/header.ejs %>
+  </head>
+  <body>
+    <% include partial/logo.ejs %>
+    <% include partial/menu.ejs %>
+    <br>
+    <table class="table-fill">
+      <tbody class="table-hover">
+        <tr>
+          <td> Name : <%=student.getFullName()%></td>
+        </tr>
+        <tr>
+          <td>Email : <%=student.email%></td>
+        </tr>
+      </tbody>
+    </table>
+    <form class="formaction" lass="form" action="/student/<%=id%>/addsubject" method="post">
+      <select name="SubjectId">
+        <option value="">Select Subject</option>
+        <%subjects.forEach(subject => {%>
+          <option value="<%=subject.id%>"><%=subject.subject_name%></option>
+        <%})%>
+      </select>
+      <input class="btn" type="submit" value="Add Subject">
+    </form>
+  </body>
+</html>

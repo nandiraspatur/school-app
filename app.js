@@ -1,12 +1,11 @@
 const express = require('express');
 const app = express();
-const expressLayouts = require('express-ejs-layouts');
 
 var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.use(expressLayouts);
+app.use(express.static('./assets'))
 app.set('view engine', 'ejs');
 
 const index = require('./routes/index')

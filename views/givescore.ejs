@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include partial/header.ejs %>
+  </head>
+  <body>
+    <% include partial/logo.ejs %>
+    <% include partial/menu.ejs %>
+    <br>
+    <table class="table-fill">
+      <tbody class="table-hover">
+        <tr>
+          <td> Name : <%=subject.Students[0].getFullName()%></td>
+        </tr>
+        <tr>
+          <td>Subject : <%=subject.subject_name%></td>
+        </tr>
+      </tbody>
+    </table>
+    <form class="formaction" action="/subject/<%=subject.id%>/<%=subject.Students[0].id%>/givescore" method="post">
+      <input type="text" name="score" placeholder="Score (ex: 80)"><br>
+      <input class="btn" type="submit" value="Give Score">
+    </form>
+  </body>
+</html>

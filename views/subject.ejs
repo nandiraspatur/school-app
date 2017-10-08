@@ -1,13 +1,39 @@
-<h1><%= title %></h1>
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Subject Name</th>
-  </tr>
-  <%subjects.forEach((subject)=>{%>
-    <tr>
-      <td><%=subject.id%></td>
-      <td><%=subject.subject_name%></td>
-    </tr>
-  <%})%>
-</table>
+<!DOCTYPE html>
+<html>
+  <% include partial/header.ejs %>
+  <body>
+    <% include partial/logo.ejs %>
+    <% include partial/menu.ejs %>
+    <br>
+    <table class="table-fill">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>ID</th>
+          <th>Subject Name</th>
+          <th>Teacher</th>
+          <th>Actions</th>
+          <th>Option</th>
+        </tr>
+      </thead>
+      <tbody class="table-hover">
+        <%subjects.forEach((subject, i)=>{%>
+          <tr>
+            <td><%=i+1%></td>
+            <td><%=subject.id%></td>
+            <td><%=subject.subject_name%></td>
+            <td><%subject.Teachers.forEach((dataTeacher, index)=>{%>
+              <%=index+1%>. <%=dataTeacher.getFullName()%><br>
+              <%})%>
+            </td>
+            <td><a class="action" href="/subject/<%=subject.id%>/enrolledstudents">Enrolled Students</a></td>
+            <td>
+              <a href="/subject/edit/<%=subject.id%>"><i class="material-icons">mode_edit</i></a>
+              <a href="/subject/delete/<%=subject.id%>"><i class="material-icons">delete_forever</i></a>
+            </td>
+          </tr>
+        <%})%>
+      </tbody>
+    </table>
+  </body>
+</html>

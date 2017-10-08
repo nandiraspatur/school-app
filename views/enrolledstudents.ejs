@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <% include partial/header.ejs %>
+  <body>
+    <% include partial/logo.ejs %>
+    <% include partial/menu.ejs %>
+    <br>
+    <table class="table-fill">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>ID</th>
+          <th>Student Name</th>
+          <th>Score</th>
+          <th>Score By Letter</th>
+        </tr>
+      </thead>
+      <tbody class="table-hover">
+        <%subject.Students.forEach((student, i) => {%>
+          <tr>
+            <td><%=i+1%></td>
+            <td><%=student.id%></td>
+            <td><%=student.getFullName()%></td>
+            <%if(student.StudentSubject.score){%>
+              <td><%=student.StudentSubject.score%></td>
+            <%}else{%>
+              <td><a class="action" href="/subject/<%=subjectId%>/<%=student.id%>/givescore">Give Score</a></td>
+            <%}%>
+            <%if(student.StudentSubject.score){%>
+              <td><%=student.StudentSubject.getLetterScore()%></td>
+            <%}else{%>
+              <td>empty</td>
+            <%}%>
+          </tr>
+        <%})%>
+      </tbody>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include partial/header.ejs %>
+  </head>
+  <body>
+    <% include partial/logo.ejs %>
+    <% include partial/menu.ejs %>
+    <br>
+    <p style="color:red; text-align:center;"><%= alert %></p>
+    <form class="form" action="/subject/add" method="post">
+      <input type="text" name="subject_name" placeholder="Subject Name"><br>
+      <input class="btn" type="submit" value="Add Subject">
+    </form>
+  </body>
+</html>

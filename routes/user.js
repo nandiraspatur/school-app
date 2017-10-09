@@ -58,11 +58,11 @@ function renderAddUser(req, res, errMsg){
   res.render('user-add', {title:'Add User', alert:errMsg, role:req.session.role})
 }
 
-route.get('/user/add', function(req, res){
+route.get('/user/add', checkAuth, checkRole, function(req, res){
   renderAddUser(req, res)
 })
 
-route.post('/user/add', function(req, res){
+route.post('/user/add', checkAuth, checkRole, function(req, res){
   req.body.secret = secretGen()
   if (req.body.username == '' || req.body.password == '' || req.body.role == '' || req.body.secret == '') {
     renderAddUser(req, res, 'Silakan isi semua data dengan lengkap!')

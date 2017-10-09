@@ -14,16 +14,19 @@ route.get('/login', function (req, res) {
 })
 
 route.post('/login', function (req, res) {
-  req.body.password = encrypt(req.body.password)
-  console.log(req.body.password);
-  models.User.findOne({where:req.body}).then(user=>{
-    if(!user){
-      renderUser(req, res, 'Username atau Password salah!!')
-    }else{
-      req.session.role = user.role;
-      req.session.username = user.username;
+  models.User.findOne({
+    where:{
+      username:req.body.username
+    }
+  }).then(result=>{
+    let password = encrypt(req.body.password,result.secret)
+    if(password == result.password){
+      req.session.role = result.role;
+      req.session.username = result.username;
       req.session.auth = true;
       res.redirect('/')
+    }else{
+      renderUser(req, res, 'Username atau Password salah!!')
     }
   })
 })
@@ -55,11 +58,11 @@ function renderAddUser(req, res, errMsg){
   res.render('user-add', {title:'Add User', alert:errMsg, role:req.session.role})
 }
 
-route.get('/user/add', checkAuth, checkRole, function(req, res){
+route.get('/user/add', function(req, res){
   renderAddUser(req, res)
 })
 
-route.post('/user/add', checkAuth, checkRole, function(req, res){
+route.post('/user/add', function(req, res){
   req.body.secret = secretGen()
   if (req.body.username == '' || req.body.password == '' || req.body.role == '' || req.body.secret == '') {
     renderAddUser(req, res, 'Silakan isi semua data dengan lengkap!')

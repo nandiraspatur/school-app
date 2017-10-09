@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
   User.beforeCreate((user, options) => {
-    user.password = encrypt(user.password)
+    user.password = encrypt(user.password, user.secret)
   });
   return User;
 };

@@ -12,9 +12,8 @@ module.exports = {
         role: 'academic'
       },{
         username: 'charlesxavier',
-        password: '030c59d4f7c436389b0dac28a1cf1d0445f5ca37bab9bd215e38fdf96e54f82d',
-        role: 'headmaster',
-        secret: 'H8Tf6bqY',
+        password: 'magnetowhy',
+        role: 'headmaster'
       }
     ]);
   },

@@ -15,6 +15,7 @@ route.get('/login', function (req, res) {
 
 route.post('/login', function (req, res) {
   req.body.password = encrypt(req.body.password)
+  console.log(req.body.password);
   models.User.findOne({where:req.body}).then(user=>{
     if(!user){
       renderUser(req, res, 'Username atau Password salah!!')

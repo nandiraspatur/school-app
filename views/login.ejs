@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include partial/header.ejs %>
+  </head>
+  <body>
+    <div class="home">
+      <%include partial/logo.ejs%>
+      <h1>Welcome To School App</h1>
+    </div>
+    <h2 style="text-align:center;">Login</h2>
+    <p style="text-align:center; color:red;"><%=alert%></p>
+    <form class="form" action="/login" method="post">
+      <input type="text" name="username" placeholder="Username"><br>
+      <input type="password" name="password" placeholder="Password"><br>
+      <input class="btn" type="submit" value="Login">
+    </form>
+    <br>
+  </body>
+</html>

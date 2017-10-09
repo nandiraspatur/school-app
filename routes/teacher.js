@@ -1,7 +1,18 @@
-var express = require('express');
-var route = express.Router();
+const express = require('express');
+const route = express.Router();
+const session = require('express-session')
+const models = require('../models')
+const checkAuth = require('../helper/checkauth')
 
-var models = require('../models')
+route.use(checkAuth)
+
+route.use(function (req, res, next) {
+  if(req.session.role == 'headmaster'){
+    next()
+  }else{
+    res.redirect('/')
+  }
+})
 
 route.get('/', function (req, res) {
   models.Teacher.findAll({
@@ -10,7 +21,7 @@ route.get('/', function (req, res) {
     }],
     order: ['"first_name"']
   }).then(function(teachers) {
-    res.render('teacher', {teachers:teachers, title:'Teacher Data'})
+    res.render('teacher', {teachers:teachers, title:'Teacher Data', role:req.session.role})
   }).catch(function(err){
     console.log(err);
   });
@@ -18,7 +29,7 @@ route.get('/', function (req, res) {
 
 // add teacher
 function renderTeacherAdd(req, res, errMsg){
-  res.render('teacher-add', {title:'Add Teacher', alert:errMsg})
+  res.render('teacher-add', {title:'Add Teacher', alert:errMsg, role:req.session.role})
 }
 
 route.get('/add', function (req, res) {
@@ -43,7 +54,7 @@ route.get('/edit/:id', function (req, res) {
       }]}),
     models.Subject.findAll()
   ]).then(data => {
-    res.render('teacher-edit', {teacher:data[0], subjects:data[1], id:req.params.id, title:'Edit Teacher'})
+    res.render('teacher-edit', {teacher:data[0], subjects:data[1], id:req.params.id, title:'Edit Teacher', role:req.session.role})
   })
 })
 

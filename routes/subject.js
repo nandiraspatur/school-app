@@ -1,7 +1,18 @@
-var express = require('express');
-var route = express.Router();
+const express = require('express');
+const route = express.Router();
+const session = require('express-session')
+const models = require('../models')
+const checkAuth = require('../helper/checkauth')
 
-var models = require('../models')
+route.use(checkAuth)
+
+route.use(function (req, res, next) {
+  if(req.session.role == 'academic' || req.session.role == 'headmaster'){
+    next()
+  }else{
+    res.redirect('/')
+  }
+})
 
 route.get('/', function (req, res) {
   models.Subject.findAll({
@@ -10,7 +21,7 @@ route.get('/', function (req, res) {
     }],
     order: ['"id"']
   }).then(function(subjects) {
-      res.render('subject', {subjects:subjects, title:'Subject Data'})
+      res.render('subject', {subjects:subjects, title:'Subject Data', role:req.session.role})
     }).catch(function(err){
       console.log(err);
     });
@@ -25,12 +36,12 @@ route.get('/:id/enrolledstudents', function (req, res) {
       }]
     }
   ).then(subjectData => {
-    res.render('enrolledstudents', {subject:subjectData, subjectId:req.params.id, title:subjectData.subject_name})
+    res.render('enrolledstudents', {subject:subjectData, subjectId:req.params.id, title:subjectData.subject_name, role:req.session.role})
   })
 })
 
 function renderSubjectAdd(req, res, errMsg){
-  res.render('subject-add', {title:'Add Subject', alert:errMsg})
+  res.render('subject-add', {title:'Add Subject', alert:errMsg, role:req.session.role})
 }
 
 //add subject
@@ -49,7 +60,7 @@ route.post('/add', function (req, res) {
 // edit subject
 route.get('/edit/:id', function (req, res) {
   models.Subject.findById(req.params.id).then(subjectData => {
-    res.render('subject-edit', {subject:subjectData, id:req.params.id, title:'Edit Subject'})
+    res.render('subject-edit', {subject:subjectData, id:req.params.id, title:'Edit Subject', role:req.session.role})
   })
 })
 
@@ -72,7 +83,7 @@ route.get('/:id/addsubject', function (req, res) {
     models.Subject.findById(req.params.id),
     models.Subject.findAll()
   ]).then(data => {
-    res.render('subject-addsubject', {subject:data[0], subjects:data[1], id:req.params.id, title:'Add Subject'})
+    res.render('subject-addsubject', {subject:data[0], subjects:data[1], id:req.params.id, title:'Add Subject', role:req.session.role})
   })
 })
 
@@ -89,7 +100,7 @@ route.get('/:SubjectId/:StudentId/givescore', function (req, res) {
       model: models.Student,
       where: {id:req.params.StudentId}
     }]}).then(subjectData => {
-      res.render('givescore', {subject:subjectData, title:'Give Score'})
+      res.render('givescore', {subject:subjectData, title:'Give Score', role:req.session.role})
   })
 })
 

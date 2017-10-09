@@ -2,10 +2,12 @@
 <html>
   <% include partial/header.ejs %>
   <body>
+    <%include partial/logo.ejs%>
+    <% include partial/menu.ejs %>
+    <br>
     <div class="home">
-      <%include partial/logo.ejs%>
-      <h1>Welcome To App School</h1>
+      <h1>Welcome To School App <%=user.username%></h1>
+      <p>Role - <%=user.role%></p>
     </div>
-  <% include partial/menu.ejs %>
   </body>
 </html>

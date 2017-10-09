@@ -7,12 +7,6 @@ module.exports = {
       },
       {
         subject_name: 'Ekonomi'
-      },
-      {
-        subject_name: 'Matematika'
-      },
-      {
-        subject_name: 'Fisika'
       }]);
   },
 
